@@ -4,27 +4,28 @@ import './App.css';
 import Login from './components/Login'
 import UserOptions from './components/UserOptions'
 import SignUp from './components/SignUp'
-import Loading from './components/Loading'
+// import {ActionCableProvider} from 'react-actioncable-provider'
+// import Loading from './components/Loading'
+// import { jwt } from 'jsonwebtoken'
 
 class App extends Component {
 
   state = {
     // verifying: false,
     logged_in: false,
-    user: null
+    user: {}
   }
 
   // Forget verifying, save the user object in local storage and make a fetch request to verify.
   // Check if user object is empty or not
 
   componentWillMount = () => {
-    if (localStorage.getItem("u")){
+    if (localStorage.getItem("token")){
       this.setState({
-        logged_in: true,
-        user: localStorage.getItem("u")
-      })
-      this.authenticateFetch(localStorage.getItem("token"))
-    }
+          logged_in: true
+        })
+        this.authenticateFetch(localStorage.getItem("token"))
+      }
   }
 
   // componentWillMount(){
@@ -61,10 +62,9 @@ class App extends Component {
 
   handleSignOutClick = () => {
     localStorage.removeItem('token')
-    localStorage.removeItem('u')
     this.setState({
       logged_in: false,
-      user: null
+      user: {}
     })
   }
 
@@ -82,7 +82,11 @@ class App extends Component {
         <header className="App-header">
           <h1>Two-Island Bridge 🌉</h1>
         </header>
-          {this.state.logged_in ? <UserOptions signOut={this.handleSignOutClick} user={this.state.user} /> : 
+          {this.state.logged_in ? 
+  
+            
+              <UserOptions signOut={this.handleSignOutClick} user={this.state.user} /> 
+           : 
             <div>
               <label>Login</label>
               <Login setAppState={this.userToTopState} />

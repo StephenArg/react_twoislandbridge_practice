@@ -21,7 +21,7 @@ class SignUp extends Component {
     }
 
     setLocalStorage = (object) => {
-        localStorage.setItem("u", object.user)
+        // localStorage.setItem("u", object.user)
         localStorage.setItem("token", object.jwt)
         this.props.setAppState(object.user)
     }

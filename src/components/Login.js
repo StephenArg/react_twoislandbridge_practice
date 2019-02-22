@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+// import jwt from 'jsonwebtoken'
 
 class Login extends Component {
 
@@ -21,9 +22,8 @@ class Login extends Component {
     }
 
     setLocalStorage = (object) => {
-        localStorage.setItem("u", object.user)
+        // localStorage.setItem("u", jwt.sign(object.user, "frontPass7"))
         localStorage.setItem("token", object.jwt)
-        console.log(this)
         this.props.setAppState(object.user)
     }
 
