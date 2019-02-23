@@ -31,3 +31,11 @@
     transform: rotate(360deg);
   }
 }
+
+.chat-list{
+  list-style-type: none
+}
+
+.text-messages{
+  color: blue
+}

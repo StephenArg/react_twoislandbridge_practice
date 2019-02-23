@@ -8,12 +8,33 @@ class ChatBox extends Component {
     }
 
     messageToState = (message) => {
+        if (message.send_id) {
+            this.reopenRoom()
+        } else {
+        message.message.user_id = message.user.name
         console.log(message.message)
         this.setState({
             chatMessages: [...this.state.chatMessages, message.message]
         })
+      }
     }
 
+    reopenRoom = () => {
+        let info = {
+            user_id: this.props.user.id,
+            conversation_id: this.props.conversation_id
+        }
+        fetch("http://localhost:3000/conversation/reopen", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(info)
+          })
+          this.setState({
+              chatMessages: []
+          })
+    }
 
     setFormValue = (e) => {
         this.setState({
@@ -42,14 +63,15 @@ class ChatBox extends Component {
     }
 
     render(){
+        console.log(this.props.conversation_id)
         let allMessages = this.state.chatMessages.map(message => {
-            return <li key={message.id} ><small>{message.content}</small></li>
+            return <li key={message.id} className="text-messages" ><small>{message.user_id}: {message.content}</small></li>
         })
         return(
             <div>
                 <div className="chat-box">
                     <h5> Chat Messages</h5>
-                    <ul>
+                    <ul className="chat-list">
                         {allMessages}
                     </ul>
                 </div>

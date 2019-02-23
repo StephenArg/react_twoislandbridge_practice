@@ -43,6 +43,10 @@ class Chatroom extends Component {
         this.child.current.messageToState(message)
     }
 
+    logIt(){
+        console.log("Disconnected")
+    }
+
     render(){
         return(
             <div>
@@ -53,6 +57,7 @@ class Chatroom extends Component {
                     (<ActionCableConsumer 
                     channel={{ channel: 'ConversationsChannel', conversation_id: this.state.conversation_id}}
                     onReceived={this.receivedMessageToChild}
+                    onDisconnected={this.logIt}
                     />) : null}
                     
                     <ChatBox ref={this.child} user={this.props.user} conversation_id={this.state.conversation_id} returnMessage={this.receivedMessageToChild} />
