@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import '../App.css';
 import { ActionCableConsumer } from 'react-actioncable-provider';
+import ChatBox from './ChatBox'
 
 class Chatroom extends Component {
 
+    child = React.createRef()
+
     state = {
         chatting: false,
-        conversation_id: null,
-        chatMessages: [],
-        formValue: ""
+        conversation_id: null
     }
 
 
@@ -38,42 +39,11 @@ class Chatroom extends Component {
         })
     }
 
-    messageToState = (message) => {
-        console.log(message.message)
-        this.setState({
-            chatMessages: [...this.state.chatMessages, message.message]
-        })
-    }
-
-    setFormValue = (e) => {
-        this.setState({
-            formValue: e.target.value
-        })
-    }
-
-    submitMessage = (e) => {
-        e.preventDefault()
-        let message = {
-            content: e.target.message.value,
-            user_id: this.props.user.id,
-            conversation_id: this.state.conversation_id
-        }
-        fetch("http://localhost:3000/messages", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(message)
-          })
-          this.setState({
-              formValue: ""
-          })
+    receivedMessageToChild = (message) => {
+        this.child.current.messageToState(message)
     }
 
     render(){
-        let allMessages = this.state.chatMessages.map(message => {
-            return <li key={message.id} ><small>{message.content}</small></li>
-        })
         return(
             <div>
                 <h3>Here in chatroom</h3>
@@ -82,20 +52,10 @@ class Chatroom extends Component {
                     {this.state.conversation_id ?
                     (<ActionCableConsumer 
                     channel={{ channel: 'ConversationsChannel', conversation_id: this.state.conversation_id}}
-                    onReceived={this.messageToState}
+                    onReceived={this.receivedMessageToChild}
                     />) : null}
                     
-                    <div className="chat-box">
-                        <h5> Chat Messages</h5>
-                        <ul>
-                            {allMessages}
-                        </ul>
-                    </div>
-                    <form onSubmit={this.submitMessage}>
-                        <input name="message" placeholder="Enter text here" value={this.state.formValue} onChange={this.setFormValue} />
-                        <input type="submit" value="Send" />
-                    </form>
-
+                    <ChatBox ref={this.child} user={this.props.user} conversation_id={this.state.conversation_id} returnMessage={this.receivedMessageToChild} />
 
                     <button onClick={this.stopChatting} >Stop Chatting</button> 
                 </div>
