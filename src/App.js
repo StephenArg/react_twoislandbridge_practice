@@ -80,7 +80,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Two-Island Bridge 🌉</h1>
+          <h1>Two-Island Bridge <span role="img" aria-label="bridge">🌉</span></h1>
         </header>
           {this.state.logged_in ? 
   

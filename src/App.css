@@ -32,10 +32,31 @@
   }
 }
 
-.chat-list{
-  list-style-type: none
+.chat-list {
+  list-style-type: none;
+  background: pink;
+  overflow: scroll;
+  height: 530px;
+  width: 810px;
+  text-align: left;
 }
 
-.text-messages{
+.text-messages {
   color: blue
+}
+
+.chatroom-container {
+  background: gray;
+  height: 640px;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+}
+
+/* .chat-box {
+  align-self: center
+} */
+
+
+#video-feed-main {
+  float: left
 }

@@ -9,13 +9,15 @@ class Chatroom extends Component {
 
     state = {
         chatting: false,
-        conversation_id: null
+        conversation_id: null,
+        videoID: null
     }
 
 
     startChatting = () => {
         this.setState({
-            chatting: true
+            chatting: true,
+            videoID: null
         })
         fetch("http://localhost:3000/conversation/search", {
             method: "POST",
@@ -29,7 +31,8 @@ class Chatroom extends Component {
 
     setConversationId = (object) => {
         this.setState({
-            conversation_id: object.conversation_id
+            conversation_id: object.conversation_id,
+            videoID: object.videoID
         })
     }
 
@@ -48,21 +51,31 @@ class Chatroom extends Component {
     }
 
     render(){
+        let videoAddress = `https://tokbox.com/embed/embed/ot-embed.js?embedId=4883260d-b162-4821-a974-c8cbdd574cb1&room=${this.state.videoID}&iframe=true`
         return(
             <div>
                 <h3>Here in chatroom</h3>
-                {this.state.chatting ?
-                <div>
-                    {this.state.conversation_id ?
-                    (<ActionCableConsumer 
-                    channel={{ channel: 'ConversationsChannel', conversation_id: this.state.conversation_id}}
-                    onReceived={this.receivedMessageToChild}
-                    onDisconnected={this.logIt}
-                    />) : null}
-                    
-                    <ChatBox ref={this.child} user={this.props.user} conversation_id={this.state.conversation_id} returnMessage={this.receivedMessageToChild} />
+                {this.state.chatting && this.state.videoID ?
+                <div className="chatroom-container">
+                    <div className="video-frame">
+                    {this.state.videoID ?
+                    (<iframe title="video-frame" id="video-feed-main" src={videoAddress} width="800" height="640" scrolling="auto" allow="microphone; camera" ></iframe>) 
+                    : null}
+                    </div>
 
-                    <button onClick={this.stopChatting} >Stop Chatting</button> 
+                    <div className="chat-box">
+                        {this.state.conversation_id ?
+                        (
+                        <ActionCableConsumer 
+                        channel={{ channel: 'ConversationsChannel', conversation_id: this.state.conversation_id, user_id: this.props.user.id}}
+                        onReceived={this.receivedMessageToChild}
+                        onDisconnected={this.logIt}
+                        />) : null}
+                        
+                        <ChatBox ref={this.child} user={this.props.user} conversation_id={this.state.conversation_id} returnMessage={this.receivedMessageToChild} />
+
+                        <button onClick={this.stopChatting} >Stop Chatting</button> 
+                    </div>
                 </div>
                 :
                 <button onClick={this.startChatting} >Start Chatting</button>
