@@ -31,10 +31,11 @@ class Login extends Component {
         e.preventDefault()
         let user = {
             name: this.state.name,
-            password: this.state.password
+            password: this.state.password,
+            location: this.props.location
         }
 
-        fetch("http://localhost:3000/user/login", {
+        fetch("/user/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

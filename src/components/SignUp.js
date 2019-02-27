@@ -30,10 +30,11 @@ class SignUp extends Component {
         e.preventDefault()
         let user = {
             name: this.state.name,
-            password: this.state.password
+            password: this.state.password,
+            location: this.props.location
         }
 
-        fetch("http://localhost:3000/users", {
+        fetch("/users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

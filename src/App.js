@@ -13,7 +13,8 @@ class App extends Component {
   state = {
     // verifying: false,
     logged_in: false,
-    user: {}
+    user: {},
+    location: null
   }
 
   // Forget verifying, save the user object in local storage and make a fetch request to verify.
@@ -26,6 +27,15 @@ class App extends Component {
         })
         this.authenticateFetch(localStorage.getItem("token"))
       }
+      fetch("https://geoip-db.com/json/")
+      .then(res => res.json())
+      .then(this.setCountry)
+  }
+
+  setCountry = (locationInfo) => {
+    this.setState({
+        location: locationInfo.country_name
+    })
   }
 
   // componentWillMount(){
@@ -42,7 +52,7 @@ class App extends Component {
     let object = {
       jwt: token
     }
-    fetch("http://localhost:3000/user/authenticate", {
+    fetch("/user/authenticate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -89,9 +99,9 @@ class App extends Component {
            : 
             <div>
               <label>Login</label>
-              <Login setAppState={this.userToTopState} />
+              <Login setAppState={this.userToTopState} location={this.state.location} />
               <label>Sign Up</label>
-              <SignUp setAppState={this.userToTopState} />
+              <SignUp setAppState={this.userToTopState} location={this.state.location} />
             </div> }
           
       </div>

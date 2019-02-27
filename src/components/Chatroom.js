@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 import ChatBox from './ChatBox'
+import $ from 'jquery'
 
 class Chatroom extends Component {
 
@@ -13,13 +14,19 @@ class Chatroom extends Component {
         videoID: null
     }
 
+    // componentDidMount = () => {
+    //     setTimeout(() => {
+    //        $('#leave').trigger('click')
+    //     }, 7000)
+        
+    // }
 
     startChatting = () => {
         this.setState({
             chatting: true,
             videoID: null
         })
-        fetch("http://localhost:3000/conversation/search", {
+        fetch("/conversation/search", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -75,12 +82,13 @@ class Chatroom extends Component {
                         <ChatBox ref={this.child} user={this.props.user} conversation_id={this.state.conversation_id} returnMessage={this.receivedMessageToChild} />
 
                         <button onClick={this.stopChatting} >Stop Chatting</button> 
+                        <button onClick={this.startChatting} >Next</button>
                     </div>
                 </div>
                 :
                 <button onClick={this.startChatting} >Start Chatting</button>
                 }
-                <button onClick={this.props.leaveChat} >Leave Chat</button>
+                <button id="leave" onClick={this.props.leaveChat} >Leave Chat</button>
             </div>
         )
     }

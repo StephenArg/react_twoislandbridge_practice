@@ -4,12 +4,26 @@ import '../App.css';
 class ChatBox extends Component {
     state = {
         chatMessages: [],
-        formValue: ""
+        formValue: "",
+        guestLocation: null,
+        guestName: null
     }
 
     messageToState = (message) => {
-        if (message.send_id) {
+        if (message.send_id === "reopen") {
             this.reopenRoom()
+        } else if (message.send_id === "location") {
+            if (message.user1Location === this.props.user.location && message.user1Name === this.props.user.name){
+                this.setState({
+                    guestLocation: message.user2Location,
+                    guestName: message.user2Name
+                })
+            } else {
+                this.setState({
+                    guestLocation: message.user1Location,
+                    guestName: message.user1Name
+                })
+            }
         } else {
         message.message.user_id = message.user.name
         console.log(message.message)
@@ -24,7 +38,7 @@ class ChatBox extends Component {
             user_id: this.props.user.id,
             conversation_id: this.props.conversation_id
         }
-        fetch("http://localhost:3000/conversation/reopen", {
+        fetch("/conversation/reopen", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -32,7 +46,9 @@ class ChatBox extends Component {
             body: JSON.stringify(info)
           })
           this.setState({
-              chatMessages: []
+              chatMessages: [],
+              guestLocation: null,
+              guestName: null
           })
     }
 
@@ -50,7 +66,7 @@ class ChatBox extends Component {
             user_id: this.props.user.id,
             conversation_id: this.props.conversation_id
         }
-        fetch("http://localhost:3000/messages", {
+        fetch("/messages", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -67,11 +83,16 @@ class ChatBox extends Component {
         let allMessages = this.state.chatMessages.map(message => {
             return <li key={message.id} className="text-messages" ><small>{message.user_id}: {message.content}</small></li>
         })
+        const {user} = this.props
         return(
             <div>
                 <div className="chat-box">
-                    <h5> Chat Messages</h5>
                     <ul className="chat-list">
+                        <h5> Chat Messages</h5>
+                        <h5> - {user.name} (You) - Location: {user.location}</h5>
+                        {this.state.guestLocation ?
+                        (<h5> - {this.state.guestName} (Joined) - Location: {this.state.guestLocation} </h5>)
+                        : null}
                         {allMessages}
                     </ul>
                 </div>
