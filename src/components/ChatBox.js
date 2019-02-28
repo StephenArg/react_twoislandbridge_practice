@@ -38,7 +38,7 @@ class ChatBox extends Component {
             user_id: this.props.user.id,
             conversation_id: this.props.conversation_id
         }
-        fetch("/conversation/reopen", {
+        fetch(`${process.env.REACT_APP_API_LOCATION}/api/conversation/reopen`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -66,7 +66,7 @@ class ChatBox extends Component {
             user_id: this.props.user.id,
             conversation_id: this.props.conversation_id
         }
-        fetch("/messages", {
+        fetch(`${process.env.REACT_APP_API_LOCATION}/api/messages`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

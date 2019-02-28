@@ -26,7 +26,7 @@ class Chatroom extends Component {
             chatting: true,
             videoID: null
         })
-        fetch("/conversation/search", {
+        fetch(`${process.env.REACT_APP_API_LOCATION}/api/conversation/search`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

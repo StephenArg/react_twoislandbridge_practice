@@ -52,7 +52,7 @@ class App extends Component {
     let object = {
       jwt: token
     }
-    fetch("/user/authenticate", {
+    fetch(`${process.env.REACT_APP_API_LOCATION}/api/user/authenticate`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
