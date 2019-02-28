@@ -1,6 +1,13 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const http = require('http');
+const path = require('path');
 
-app.use(express.static(__dirname + '/'));
+let app = express();
 
-app.listen(process.env.PORT || 8080);
+app.use(express.static(path.join(__dirname, 'build')));
+
+const port = process.env.PORT || '8080';
+app.set('port', port);
+
+const server = http.createServer(app);
+server.listen(port, () => console.log(`Running on localhost:${port}`));
