@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import {ActionCableProvider} from 'react-actioncable-provider'
 
 ReactDOM.render(
-<ActionCableProvider url={`${process.env.REACT_APP_API_LOCATION}/cable`} >
+<ActionCableProvider url={`${process.env.REACT_APP_API_LOCATION}cable`} >
     <App />
 </ActionCableProvider>
 , document.getElementById('root'));
