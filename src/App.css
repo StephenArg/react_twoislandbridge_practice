@@ -158,7 +158,7 @@
 
 .logo-image {
   position: absolute;
-  left: 23.5em;
+  left: 35.5em;
   border-radius: 14px 7px;
   height: 1.5em;
   width: 2.2em;
@@ -198,10 +198,35 @@
 .logo-text{
   position:relative;
   top: 1em;
-  left: -17.5em;
+  left: 0em;
   height:3em
 }
 
 .user-options-buttons {
   width: 75px
+}
+
+.user-icon {
+  position: relative;
+  border-radius: 50px;
+  height: 35px;
+  width: 35px;
+  left: 5em
+}
+
+.user-name {
+  position: relative;
+  top: 0.2em;
+  width: 12em;
+  font-size: 23px;
+  text-align: left;
+  left: 4em;
+}
+
+#user-options-icon-div {
+  display: flex;
+  flex-direction: row;
+  width: 50em;
+  height: 2.5em;
+  justify-content: center;
 }

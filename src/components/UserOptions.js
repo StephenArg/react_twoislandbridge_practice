@@ -27,7 +27,9 @@ class UserOptions extends React.Component {
                 {this.state.joinedChatroom ?
                 <Chatroom leaveChat={this.handleLeaveChat} user={user} /> :
                 <div id="user-options-container">
-                {user.name}
+                <div id="user-options-icon-div" >
+                <img src={user.image_url} className="user-icon" /> <div className="user-name">{user.name}</div>
+                </div>
                 <button className="user-options-buttons" onClick={this.handleChatClick}>Chat</button>
                 <button className="user-options-buttons" onClick={this.props.signOut}>Log Out</button>
                 </div> 

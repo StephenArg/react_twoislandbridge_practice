@@ -5,21 +5,21 @@ import '../App.css';
 class Login extends Component {
 
     state = {
-        name: "",
+        email: "",
         password: ""
     }
 
     handleChange = (e) => {
         this.setState({
-            name: e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
-    handleChangePassword = (e) => {
-        this.setState({
-            password: e.target.value
-        })
-    }
+    // handleChangePassword = (e) => {
+    //     this.setState({
+    //         password: e.target.value
+    //     })
+    // }
 
     setLocalStorage = (object) => {
         // localStorage.setItem("u", jwt.sign(object.user, "frontPass7"))
@@ -30,7 +30,7 @@ class Login extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         let user = {
-            name: this.state.name,
+            email: this.state.email,
             password: this.state.password,
             location: this.props.location
         }
@@ -52,10 +52,10 @@ class Login extends Component {
                 <form id="login-form" className="pure-form" onSubmit={this.handleSubmit}>
                     <fieldset id="login-fieldset" >
                         <div>
-                            <input className="login-inputs" onChange={this.handleChange} name="name" placeholder="Email" value={this.state.name}/>
+                            <input className="login-inputs" onChange={this.handleChange} name="email" placeholder="Email" value={this.state.email}/>
                         </div>
                         <div>
-                            <input id="login-password" className="login-inputs" type="password" onChange={this.handleChangePassword} name="password" placeholder="Password" value={this.state.password}/>
+                            <input id="login-password" className="login-inputs" type="password" onChange={this.handleChange} name="password" placeholder="Password" value={this.state.password}/>
                         </div>
                         <button className="button-small pure-button" type="submit">Log In</button>
                     </fieldset>
