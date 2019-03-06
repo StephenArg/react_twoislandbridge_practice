@@ -11,7 +11,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: rgba(27,23,25, .8);
   min-height: 15vh;
   display: flex;
   flex-direction: row;
@@ -157,12 +157,12 @@
 }
 
 .logo-image {
-  position: absolute;
-  left: 35.5em;
+  position: relative;
+  left: -14.2em;
   border-radius: 14px 7px;
   height: 1.5em;
   width: 2.2em;
-  top: 2.2em;
+  top: 2.5em;
   -webkit-transition: -webkit-transform .8s ease-in-out;
           transition:         transform .8s ease-in-out;
 }
@@ -173,8 +173,8 @@
 } */
 
 .logo-image-login {
-  position: absolute;
-  left: 21.5em;
+  position: relative;
+  left: -30.5em;
   border-radius: 14px 7px;
   height: 1.5em;
   width: 2.2em;
@@ -191,15 +191,15 @@
 .logo-text-login{
   position:relative;
   top: 1em;
-  left: -15.5em;
+  left: -2.1em;
   height:3em
 }
 
 .logo-text{
   position:relative;
   top: 1em;
-  left: 0em;
-  height:3em
+  left: 13.7em;
+  height:3.5em
 }
 
 .user-options-buttons {
