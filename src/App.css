@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-image: url("https://imgs.6sqft.com/wp-content/uploads/2018/10/05110533/manhattan-bridge.jpg");
+  height: 983px
 }
 
 .App-logo {
@@ -12,15 +14,32 @@
   background-color: #282c34;
   min-height: 15vh;
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: row;
+  justify-content: space-around;
   /* align-items: center; */
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /* justify-content: center; */
+  font-size: calc(7px + 2vmin);
   color: white;
+  position: relative;
+}
+
+#lower-header{
+  min-height: 7vh;
+  background-color: rgba(25,25,25, .8);
+}
+
+#user-options-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.button-small {
+  font-size: 55%;
 }
 
 @keyframes App-logo-spin {
@@ -34,29 +53,155 @@
 
 .chat-list {
   list-style-type: none;
-  background: pink;
+  background-color: rgba(75,75,75, .6);
   overflow: scroll;
   height: 530px;
-  width: 810px;
+  width: 700px;
   text-align: left;
 }
 
 .text-messages {
-  color: blue
+  color: white;
+  text-shadow: -.75px -.75px 0 rgb(0, 0, 0),
+  .75px -.75px 0 rgb(0, 0, 0),
+  -.75px .75px 0 rgb(0, 0, 0),
+  .75px .75px 0 rgb(0, 0, 0);
+  font-size: 27px
+}
+
+.location-messages {
+  color: white;
+  text-shadow: -.75px -.75px 0 rgb(0, 0, 0),
+  .75px -.75px 0 rgb(0, 0, 0),
+  -.75px .75px 0 rgb(0, 0, 0),
+  .75px .75px 0 rgb(0, 0, 0);
 }
 
 .chatroom-container {
-  background: gray;
+  background-color: rgba(25,25,25, .8);
   height: 640px;
   display: grid;
   grid-template-columns: 5fr 7fr;
+  opacity: 0.97
 }
 
 /* .chat-box {
   align-self: center
 } */
 
+#signup-label {
+  font-size: 1.875em;
+  font-family: "Gill Sans";
+  position: relative;
+  top: 1em;
+}
+#signup-form {
+  position: relative;
+  top: 3em;
+}
+.signup-input{
+  opacity: 0.85;
+}
+#signup-button {
+  opacity: 1;
+  background-color: rgba(41 ,58 , 84, 1)
+}
+
+#login-form{
+  color:black;
+}
+
+#login-fieldset {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  top: .2em;
+  left: -5em
+}
+
+#login-password {
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+.login-inputs {
+  height:2em;
+  font-size: 17px;
+  opacity: 0.8
+}
 
 #video-feed-main {
   float: left
+}
+
+#login-container {
+  height: 50px;
+  position: absolute;
+  top: 40px;
+  left: 1200px;
+}
+
+#h1-logo {
+  position: absolute;
+  left: 750px;
+  font-family: "Copperplate";
+  font-size: 120%
+}
+
+#h1-logo-login {
+  position: absolute;
+  left: 2em;
+  top:.2;
+  font-family: "Copperplate";
+  font-size: 150%
+}
+
+.logo-image {
+  position: absolute;
+  left: 23.5em;
+  border-radius: 14px 7px;
+  height: 1.5em;
+  width: 2.2em;
+  top: 2.2em;
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+          transition:         transform .8s ease-in-out;
+}
+/* 
+.logo-image:hover{
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+} */
+
+.logo-image-login {
+  position: absolute;
+  left: 21.5em;
+  border-radius: 14px 7px;
+  height: 1.5em;
+  width: 2.2em;
+  top: 2.2em;
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+          transition:         transform .8s ease-in-out;
+}
+
+.logo-image-login:hover{
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+}
+
+.logo-text-login{
+  position:relative;
+  top: 1em;
+  left: -15.5em;
+  height:3em
+}
+
+.logo-text{
+  position:relative;
+  top: 1em;
+  left: -17.5em;
+  height:3em
+}
+
+.user-options-buttons {
+  width: 75px
 }

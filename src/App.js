@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Login from './components/Login'
 import UserOptions from './components/UserOptions'
 import SignUp from './components/SignUp'
+import logo from "./pictures/bridge.jpg"
+import textlogo from "./pictures/generated.svg"
 // import {ActionCableProvider} from 'react-actioncable-provider'
 // import Loading from './components/Loading'
 // import { jwt } from 'jsonwebtoken'
@@ -90,20 +92,28 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Two-Island Bridge <span role="img" aria-label="bridge">🌉</span></h1>
+          {this.state.logged_in ? 
+          <Fragment>
+          <img className="logo-text" src={textlogo} alt="" /><img className="logo-image" alt="" src={logo} />
+          </Fragment> : 
+          <Fragment>
+            <img className="logo-text-login" src={textlogo} alt="" /><img className="logo-image-login" alt="" src={logo} />
+          <div id="login-container">
+          <Login setAppState={this.userToTopState} location={this.state.location} />
+          </div> 
+          </Fragment>}
         </header>
+        <header id="lower-header">
+          </header>
           {this.state.logged_in ? 
   
             
               <UserOptions signOut={this.handleSignOutClick} user={this.state.user} /> 
            : 
             <div>
-              <label>Login</label>
-              <Login setAppState={this.userToTopState} location={this.state.location} />
-              <label>Sign Up</label>
+              <label id="signup-label" >Sign Up</label>
               <SignUp setAppState={this.userToTopState} location={this.state.location} />
             </div> }
-          
       </div>
     );
   }

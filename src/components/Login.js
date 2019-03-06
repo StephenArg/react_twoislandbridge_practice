@@ -49,10 +49,16 @@ class Login extends Component {
     render(){
         return(
             <div>
-                <form onSubmit={this.handleSubmit}>
-                    <input onChange={this.handleChange} name="name" placeholder="Enter name here" value={this.state.name}/>
-                    <input type="password" onChange={this.handleChangePassword} name="password" placeholder="Enter password" value={this.state.password}/>
-                    <input type="submit" value="Login"/>
+                <form id="login-form" className="pure-form" onSubmit={this.handleSubmit}>
+                    <fieldset id="login-fieldset" >
+                        <div>
+                            <input className="login-inputs" onChange={this.handleChange} name="name" placeholder="Email" value={this.state.name}/>
+                        </div>
+                        <div>
+                            <input id="login-password" className="login-inputs" type="password" onChange={this.handleChangePassword} name="password" placeholder="Password" value={this.state.password}/>
+                        </div>
+                        <button className="button-small pure-button" type="submit">Log In</button>
+                    </fieldset>
                 </form>
             </div>
         )

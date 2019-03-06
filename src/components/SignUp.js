@@ -47,10 +47,17 @@ class SignUp extends Component {
     render(){
         return(
             <div>
-                <form onSubmit={this.handleSubmit}>
-                    <input onChange={this.handleChange} name="name" placeholder="Enter name here" value={this.state.name}/>
-                    <input type="password" onChange={this.handleChangePassword} name="password" placeholder="Enter password" value={this.state.password}/>
-                    <input type="submit" value="Submit User"/>
+                <form id="signup-form" className="pure-form pure-form-aligned" onSubmit={this.handleSubmit}>
+                    <fieldset>
+                        <div className="pure-control-group signup-input">
+                            <input onChange={this.handleChange} name="name" placeholder="Enter name here" value={this.state.name}/>
+                            {/* <span class="pure-form-message-inline">This is a required field.</span> */}
+                        </div>
+                        <div className="pure-control-group signup-input">
+                            <input type="password" onChange={this.handleChangePassword} name="password" placeholder="Enter password" value={this.state.password}/>
+                        </div>
+                            <input id="signup-button" type="submit" className="pure-button pure-button-primary" value="Sign Up"/>
+                    </fieldset>
                 </form>
             </div>
         )

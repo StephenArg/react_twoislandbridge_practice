@@ -5,6 +5,7 @@
   "dependencies": {
     "jquery": "^3.3.1",
     "jsonwebtoken": "^8.5.0",
+    "purecss": "^1.0.0",
     "react": "^16.8.2",
     "react-actioncable-provider": "^2.0.0",
     "react-dom": "^16.8.2",

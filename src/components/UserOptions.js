@@ -26,10 +26,10 @@ class UserOptions extends React.Component {
             <div>
                 {this.state.joinedChatroom ?
                 <Chatroom leaveChat={this.handleLeaveChat} user={user} /> :
-                <div>
+                <div id="user-options-container">
                 {user.name}
-                <button onClick={this.handleChatClick}>Chat</button>
-                <button onClick={this.props.signOut}>Log Out</button>
+                <button className="user-options-buttons" onClick={this.handleChatClick}>Chat</button>
+                <button className="user-options-buttons" onClick={this.props.signOut}>Log Out</button>
                 </div> 
                 }
             </div>

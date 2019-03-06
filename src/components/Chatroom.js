@@ -14,12 +14,12 @@ class Chatroom extends Component {
         videoID: null
     }
 
-    // componentDidMount = () => {
-    //     setTimeout(() => {
-    //        $('#leave').trigger('click')
-    //     }, 7000)
-        
-    // }
+    componentDidMount = () => {
+        // setTimeout(() => {
+        //    $('#leave').trigger('click')
+        // }, 7000)
+    }
+
 
     startChatting = () => {
         this.setState({
@@ -57,11 +57,17 @@ class Chatroom extends Component {
         console.log("Disconnected")
     }
 
+    fetchConnections = () => {
+        fetch(`${process.env.REACT_APP_API_LOCATION}/api/connections/${this.props.user.id}`)
+        .then(res => res.json())
+        .then(this.child.current.setConnections)
+    }
+
     render(){
         let videoAddress = `https://tokbox.com/embed/embed/ot-embed.js?embedId=4883260d-b162-4821-a974-c8cbdd574cb1&room=${this.state.videoID}&iframe=true`
         return(
             <div>
-                <h3>Here in chatroom</h3>
+                <h3> </h3>
                 {this.state.chatting && this.state.videoID ?
                 <div className="chatroom-container">
                     <div className="video-frame">
@@ -79,7 +85,7 @@ class Chatroom extends Component {
                         onDisconnected={this.logIt}
                         />) : null}
                         
-                        <ChatBox ref={this.child} user={this.props.user} conversation_id={this.state.conversation_id} returnMessage={this.receivedMessageToChild} />
+                        <ChatBox ref={this.child} user={this.props.user} connections={this.fetchConnections} conversation_id={this.state.conversation_id} returnMessage={this.receivedMessageToChild} />
 
                         <button onClick={this.stopChatting} >Stop Chatting</button> 
                         <button onClick={this.startChatting} >Next</button>
