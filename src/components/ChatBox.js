@@ -8,13 +8,14 @@ class ChatBox extends Component {
         guestLocation: null,
         guestName: null,
         connectionId: null,
-        connections: []
+        connections: null
     }
 
     messageToState = (message) => {
         if (message.send_id === "reopen") {
             this.reopenRoom()
         } else if (message.send_id === "location") {
+            this.props.connections()
             if (message.user1Location === this.props.user.location && message.user1Name === this.props.user.name){
                 this.setState({
                     guestLocation: message.user2Location,
@@ -28,7 +29,6 @@ class ChatBox extends Component {
                     connectionId: message.connectionId
                 })
             }
-            this.props.connections()
         } else {
         // message.message.user_id = message.user.name
         message.message.user_id = message.user
@@ -41,7 +41,7 @@ class ChatBox extends Component {
 
     setConnections = (connections) => {
         this.setState({
-            connections: [...connections]
+            connections: connections
         })
     }
 
