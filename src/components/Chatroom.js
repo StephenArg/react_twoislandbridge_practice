@@ -20,6 +20,13 @@ class Chatroom extends Component {
         // }, 7000)
     }
 
+    // Added componentDidUpdate to fetch connections after intial conversation starts
+    componentDidUpdate = () => {
+        if (this.state.conversation_id && this.state.chatting){
+            this.fetchConnections()
+        }
+    }
+
 
     startChatting = () => {
         this.setState({

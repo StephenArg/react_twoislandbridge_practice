@@ -37,7 +37,6 @@ class SignUp extends Component {
             email: this.state.email,
             image_url: this.state.image_url
         }
-        console.log(user)
 
         fetch(`${process.env.REACT_APP_API_LOCATION}/api/users`, {
             method: "POST",
