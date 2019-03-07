@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 import ChatBox from './ChatBox'
-import $ from 'jquery'
+// import $ from 'jquery'
 
 class Chatroom extends Component {
 
