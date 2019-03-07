@@ -8,18 +8,18 @@ class ChatBox extends Component {
         guestLocation: null,
         guestName: null,
         connectionId: null,
-        connections: null,
-        firstMount: true
+        connections: null
+        // firstMount: true
     }
 
-    componentDidMount = () => {
-        if (this.state.firstMount){
-            this.props.connections()
-            this.setState({
-                firstMount: false
-            })
-        }
-    }
+    // componentDidMount = () => {
+    //     if (this.state.firstMount){
+    //         this.props.connections()
+    //         this.setState({
+    //             firstMount: false
+    //         })
+    //     }
+    // }
 
     messageToState = (message) => {
         if (message.send_id === "reopen") {
