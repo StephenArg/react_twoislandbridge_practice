@@ -73,6 +73,10 @@ class ChatBox extends Component {
               guestName: null,
               connectionId: null
           })
+          window.setInterval(function() {
+            var elem = document.querySelector('#chat-box');
+            elem.scrollTop = elem.scrollHeight;
+          }, 850);
     }
 
     setFormValue = (e) => {
