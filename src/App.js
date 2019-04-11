@@ -14,6 +14,8 @@ class App extends Component {
 
   state = {
     // verifying: false,
+
+    // due to the lack of react routes, booleans are used to determine which components load on the inital boot
     logged_in: false,
     user: {},
     location: null
@@ -23,12 +25,14 @@ class App extends Component {
   // Check if user object is empty or not
 
   componentWillMount = () => {
+    // Upon mounting, if a token is present in the browsers local storage, that token will be sent to the back-end to determine which user that is and if that token is legitimate
     if (localStorage.getItem("token")){
       this.setState({
           logged_in: true
         })
         this.authenticateFetch(localStorage.getItem("token"))
       }
+    // After the method to authenticate fetch has been called, the users location will automatically be found and set in state.
       fetch("https://geoip-db.com/json/")
       .then(res => res.json())
       .then(this.setCountry)
@@ -40,17 +44,8 @@ class App extends Component {
     })
   }
 
-  // componentWillMount(){
-  //   if (localStorage.getItem("token")){
-  //     this.authenticateUser(localStorage.getItem("token"))
-  //   }
-  // }
-
-  // async authenticateUser(token){
-  //   let user = await this.authenticateFetch(token)
-  // }
-
   authenticateFetch(token){
+    // authenticates the token from users localstorage
     let object = {
       jwt: token
     }
@@ -65,6 +60,7 @@ class App extends Component {
   }
 
   setUserObjectToState = (object) => {
+    // sets the returning user object to state and redundently sets loggin_in boolean to true
     this.setState({
       // verifying: false,
       logged_in: true,
@@ -73,6 +69,7 @@ class App extends Component {
   }
 
   handleSignOutClick = () => {
+    // handles signout button by removing token and setting state to logged out condition, with blank object for user
     localStorage.removeItem('token')
     this.setState({
       logged_in: false,
@@ -81,6 +78,7 @@ class App extends Component {
   }
 
   userToTopState = (user) => {
+    // Upon login or signup, their fetch requests within their handleSubmit methods will receive back user objects, which are passed back to the front-end to set the state to loggedin.
     this.setState({
       logged_in: true,
       user: user

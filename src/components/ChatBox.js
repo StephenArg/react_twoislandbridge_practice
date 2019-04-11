@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import $ from 'jquery'
 
 class ChatBox extends Component {
     state = {
@@ -8,7 +9,7 @@ class ChatBox extends Component {
         guestLocation: null,
         guestName: null,
         connectionId: null,
-        connections: null
+        // connections: null
         // firstMount: true
     }
 
@@ -21,11 +22,18 @@ class ChatBox extends Component {
     //     }
     // }
 
+    // componentDidMount = () => {
+    //     if (this.state.guestLocation) {
+    //         this.props.connections()
+    //     }
+    // }
+
     messageToState = (message) => {
         if (message.send_id === "reopen") {
-            this.props.connections()
             this.reopenRoom()
         } else if (message.send_id === "location") {
+            // put fetch connections here
+            this.props.fetchConnections()
             if (message.user1Location === this.props.user.location && message.user1Name === this.props.user.name){
                 this.setState({
                     guestLocation: message.user2Location,
@@ -46,14 +54,17 @@ class ChatBox extends Component {
         this.setState({
             chatMessages: [...this.state.chatMessages, message.message]
         })
+        // let elem = $('.chat-box');
+        // elem.scrollTop = elem.scrollHeight;
       }
     }
 
-    setConnections = (connections) => {
-        this.setState({
-            connections: connections
-        })
-    }
+    // setConnections = (connections) => {
+    //     this.setState({
+    //         connections: connections
+    //     })
+    //     console.log(connections)
+    // }
 
     reopenRoom = () => {
         let info = {
@@ -73,10 +84,6 @@ class ChatBox extends Component {
               guestName: null,
               connectionId: null
           })
-          window.setInterval(function() {
-            var elem = document.querySelector('#chat-box');
-            elem.scrollTop = elem.scrollHeight;
-          }, 850);
     }
 
     setFormValue = (e) => {
@@ -108,6 +115,7 @@ class ChatBox extends Component {
 
     render(){
         console.log(this.props.conversation_id)
+        console.log(this.props.connections)
         let allMessages = this.state.chatMessages.map(message => {
             return <li key={message.id} className="text-messages" ><small>{message.user_id}: {message.content}</small></li>
         })

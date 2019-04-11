@@ -11,13 +11,22 @@ class Chatroom extends Component {
     state = {
         chatting: false,
         conversation_id: null,
-        videoID: null
+        videoID: null,
+        connections: null
     }
 
-    componentDidMount = () => {
-        // setTimeout(() => {
-        //    $('#leave').trigger('click')
-        // }, 7000)
+    // componentDidMount = () => {
+    //     // setTimeout(() => {
+    //     //    $('#leave').trigger('click')
+    //     // }, 7000)
+
+    // }
+
+    componentWillMount = () => {
+        if (this.state.chatting) {
+           this.fetchConnections() 
+        }
+        
     }
 
     // Added componentDidUpdate to fetch connections after intial conversation starts (Didn't work)
@@ -67,7 +76,13 @@ class Chatroom extends Component {
     fetchConnections = () => {
         fetch(`${process.env.REACT_APP_API_LOCATION}/api/connections/${this.props.user.id}`)
         .then(res => res.json())
-        .then(this.child.current.setConnections)
+        .then(this.setConnections)
+    }
+
+     setConnections = (connections) => {
+        this.setState({
+            connections: connections
+        })
     }
 
     render(){
@@ -92,7 +107,8 @@ class Chatroom extends Component {
                         onDisconnected={this.logIt}
                         />) : null}
                         
-                        <ChatBox ref={this.child} user={this.props.user} connections={this.fetchConnections} conversation_id={this.state.conversation_id} returnMessage={this.receivedMessageToChild} />
+                        <ChatBox ref={this.child} user={this.props.user} connections={this.state.connections} fetchConnections={this.fetchConnections}
+                         conversation_id={this.state.conversation_id} returnMessage={this.receivedMessageToChild} />
 
                         <button onClick={this.stopChatting} >Stop Chatting</button> 
                         <button onClick={this.startChatting} >Next</button>
