@@ -13,6 +13,8 @@ class Chatroom extends Component {
         conversation_id: null,
         videoID: null,
         connections: null
+        // having connections in this component's state does not work as intended. Connection errors occur once two individuals are connected and the fetchConnections
+        // rerender is called. This page can not refresh, redux is a must.
     }
 
     // componentDidMount = () => {
@@ -22,12 +24,12 @@ class Chatroom extends Component {
 
     // }
 
-    componentWillMount = () => {
-        if (this.state.chatting) {
-           this.fetchConnections() 
-        }
+    // componentWillMount = () => {
+    //     if (this.state.chatting) {
+    //        this.fetchConnections() 
+    //     }
         
-    }
+    // }
 
     // Added componentDidUpdate to fetch connections after intial conversation starts (Didn't work)
     // componentDidUpdate = () => {
@@ -73,17 +75,17 @@ class Chatroom extends Component {
         console.log("Disconnected")
     }
 
-    fetchConnections = () => {
-        fetch(`${process.env.REACT_APP_API_LOCATION}/api/connections/${this.props.user.id}`)
-        .then(res => res.json())
-        .then(this.setConnections)
-    }
+    // fetchConnections = () => {
+    //     fetch(`${process.env.REACT_APP_API_LOCATION}/api/connections/${this.props.user.id}`)
+    //     .then(res => res.json())
+    //     .then(this.setConnections)
+    // }
 
-     setConnections = (connections) => {
-        this.setState({
-            connections: connections
-        })
-    }
+    //  setConnections = (connections) => {
+    //     this.setState({
+    //         connections: connections
+    //     })
+    // }
 
     render(){
         let videoAddress = `https://tokbox.com/embed/embed/ot-embed.js?embedId=4883260d-b162-4821-a974-c8cbdd574cb1&room=${this.state.videoID}&iframe=true`
@@ -107,8 +109,7 @@ class Chatroom extends Component {
                         onDisconnected={this.logIt}
                         />) : null}
                         
-                        <ChatBox ref={this.child} user={this.props.user} connections={this.state.connections} fetchConnections={this.fetchConnections}
-                         conversation_id={this.state.conversation_id} returnMessage={this.receivedMessageToChild} />
+                        <ChatBox ref={this.child} user={this.props.user} conversation_id={this.state.conversation_id} returnMessage={this.receivedMessageToChild} />
 
                         <button onClick={this.stopChatting} >Stop Chatting</button> 
                         <button onClick={this.startChatting} >Next</button>

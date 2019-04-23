@@ -115,7 +115,6 @@ class ChatBox extends Component {
 
     render(){
         console.log(this.props.conversation_id)
-        console.log(this.props.connections)
         let allMessages = this.state.chatMessages.map(message => {
             return <li key={message.id} className="text-messages" ><small>{message.user_id}: {message.content}</small></li>
         })
