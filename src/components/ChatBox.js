@@ -33,7 +33,6 @@ class ChatBox extends Component {
             this.reopenRoom()
         } else if (message.send_id === "location") {
             // put fetch connections here
-            this.props.fetchConnections()
             if (message.user1Location === this.props.user.location && message.user1Name === this.props.user.name){
                 this.setState({
                     guestLocation: message.user2Location,
